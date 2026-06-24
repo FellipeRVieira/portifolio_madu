@@ -482,6 +482,7 @@ section{
 .sobre-images img:hover{
     transform:scale(1.05);
     z-index:10;
+    border-color: #eb4909f6;
 }
 
 /* SERVIÇOS */
