@@ -655,9 +655,15 @@ section{
     color:var(--laranja-principal);
 }
 
+.swiper-button-next::after,
+.swiper-button-prev::after{
+    color:var(--creme-quente);
+}
+
+
 .swiper-button-next:hover,
 .swiper-button-prev:hover{
-    color:var(--vermelho-quente);
+    color:var(--laranja-principal);
 }
 
 
@@ -1011,6 +1017,14 @@ footer{
 
 }
 
+
+/* Esconder setas no Mobile */
+@media screen and (max-width: 767px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none !important;
+    }
+}
 
 /*
 @keyframes flutuar {
