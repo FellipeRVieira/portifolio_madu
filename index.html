@@ -10,6 +10,8 @@
 
     <link rel="stylesheet" href="CSS/estilos.css">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 </head>
@@ -177,46 +179,53 @@
     </section>
 
     <!-- PORTFÓLIO -->
-    <section id="portfolio" class="portfolio">
+   <section id="portfolio" class="portfolio">
 
-        <div class="container">
+    <div class="container">
 
-            <div class="titulo centro reveal">
-                <span>Trabalhos</span>
-                <h2>Captações Realizadas</h2>
-            </div>
+        <div class="titulo centro reveal">
+            <span>Trabalhos</span>
+            <h2>Captações Realizadas</h2>
+        </div>
 
-            <div class="portfolio-grid">
+        <div class="swiper meuPortfolio reveal">
 
-                <div class="portfolio-item reveal">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide">
+                    <img src="img/trab.jpeg" alt="">
+                </div>
+
+                <div class="swiper-slide">
                     <img src="img/trab1.jpeg" alt="">
-                    <div class="overlay">
-                        <h3>Projeto</h3>
-                        <p>Captação de Conteúdo</p>
-                    </div>
                 </div>
 
-                <div class="portfolio-item reveal">
+                <div class="swiper-slide">
                     <img src="img/trab2.jpeg" alt="">
-                    <div class="overlay">
-                        <h3>Projeto</h3>
-                        <p>Captação de Conteúdo</p>
-                    </div>
                 </div>
 
-                <div class="portfolio-item reveal">
+                <div class="swiper-slide">
                     <img src="img/trab3.jpeg" alt="">
-                    <div class="overlay">
-                        <h3>Projeto</h3>
-                        <p>Captação de Conteúdo</p>
-                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="img/trab4.jpeg" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="img/trab5.jpeg" alt="">
                 </div>
 
             </div>
+
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
     <!-- CTA -->
  <section id="contato" class="contato reveal">
@@ -265,6 +274,8 @@
 
     </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
     <script>
 
 const menuToggle = document.getElementById("menu-toggle");
@@ -298,6 +309,62 @@ function revealOnScroll() {
 window.addEventListener("scroll", revealOnScroll);
 
 revealOnScroll();
+
+new Swiper(".meuPortfolio", {
+
+    loop: true,
+
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false
+    },
+
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+    },
+
+    breakpoints: {
+
+        // MOBILE
+        0: {
+
+            effect: "coverflow",
+
+            grabCursor: true,
+
+            centeredSlides: true,
+
+            slidesPerView: "auto",
+
+            coverflowEffect: {
+                rotate: 0,
+                stretch: 0,
+                depth: 250,
+                modifier: 1.5,
+                slideShadows: false,
+                scale: 0.85
+            }
+
+        },
+
+        // TABLET E DESKTOP
+        768: {
+
+            effect: "slide",
+
+            centeredSlides: false,
+
+            slidesPerView: 3,
+
+            spaceBetween: 20
+
+        }
+
+    }
+
+});
+
 
 </script>
     
