@@ -863,15 +863,27 @@ section{
 
 .comparativo{
 
+    width:100%;
+
+    max-width:100%;
+
     overflow-x:auto;
 
     margin-top:70px;
+
+    border-radius:20px;
+
+    -webkit-overflow-scrolling:touch;
 
 }
 
 .comparativo table{
 
     width:100%;
+
+    min-width:680px;
+
+    table-layout:fixed;
 
     border-collapse:collapse;
 
@@ -899,6 +911,8 @@ section{
     text-align:center;
 
     border-bottom:1px solid #ececec;
+
+    white-space:nowrap;
 
 }
 
@@ -1134,6 +1148,21 @@ footer{
         height:280px;
     }
 
+    .comparativo{
+        margin-top:45px;
+        border-radius:16px;
+    }
+
+    .comparativo table{
+        min-width:520px;
+        font-size:.9rem;
+    }
+
+    .comparativo th,
+    .comparativo td{
+        padding:12px 10px;
+    }
+
 }
 
 @media(max-width:768px){
@@ -1217,6 +1246,16 @@ footer{
 
     .portfolio-item img{
         height:240px;
+    }
+
+    .comparativo table{
+        min-width:460px;
+        font-size:.82rem;
+    }
+
+    .comparativo th,
+    .comparativo td{
+        padding:10px 8px;
     }
     
 }

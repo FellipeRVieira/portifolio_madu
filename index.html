@@ -706,12 +706,38 @@ function resumePortfolioCarousel() {
 
 videoSlides.forEach(slide => {
 
-    slide.addEventListener("pointerenter", pausePortfolioCarousel);
-    slide.addEventListener("pointerleave", resumePortfolioCarousel);
+    slide.addEventListener("pointerenter", (e) => {
+
+        if (e.pointerType === "mouse") {
+
+            pausePortfolioCarousel();
+
+        }
+
+    });
+
+    slide.addEventListener("pointerleave", (e) => {
+
+        if (e.pointerType === "mouse") {
+
+            resumePortfolioCarousel();
+
+        }
+
+    });
 
 });
 
 videos.forEach(video => {
+
+    // No mobile, tocar/clicar no video pausa o carrossel.
+    video.addEventListener("click", (e) => {
+
+        e.stopPropagation();
+
+        pausePortfolioCarousel();
+
+    });
 
     video.addEventListener("touchstart", (e) => {
 
@@ -720,6 +746,17 @@ videos.forEach(video => {
         pausePortfolioCarousel();
 
     });
+
+});
+
+// No mobile, tocar/clicar fora do video retoma o carrossel.
+document.addEventListener("click", (e) => {
+
+    if (!e.target.closest(".video-slide")) {
+
+        resumePortfolioCarousel();
+
+    }
 
 });
 
