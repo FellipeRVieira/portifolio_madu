@@ -1007,6 +1007,14 @@ body.dark-theme .pricing-card{
     box-shadow:0 18px 40px rgba(0,0,0,.26);
 }
 
+
+body.dark-theme .pricing-card.destaque{
+    transform:scale(1.04);
+
+    border:2px solid var(--laranja-principal);
+}
+
+
 /* Ajusta a tabela comparativa para nao ficar com fundo claro no modo escuro. */
 body.dark-theme .comparativo table{
     background:#1f1511;
