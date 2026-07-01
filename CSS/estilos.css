@@ -25,6 +25,16 @@ body{
     background:var(--creme-quente);
     color:var(--texto-escuro);
     line-height:1.8;
+    /* Suaviza a troca entre tema claro e escuro. */
+    transition:
+        background .3s ease,
+        color .3s ease;
+}
+
+/* Cores base usadas quando o tema escuro esta ativo. */
+body.dark-theme{
+    background:#140f0c;
+    color:#f8eadb;
 }
 
 /* NAVBAR */
@@ -75,6 +85,40 @@ body{
 
 .navbar nav a:hover{
     color: var(--laranja-principal);
+}
+
+/* Botao circular do seletor de tema no topo da pagina. */
+.theme-toggle{
+    width:46px;
+    height:46px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border:1px solid rgba(255,255,255,.45);
+    border-radius:50%;
+
+    background:rgba(255,255,255,.12);
+    color:var(--branco);
+
+    font-size:1.1rem;
+    cursor:pointer;
+
+    backdrop-filter:blur(8px);
+
+    transition:
+        transform .3s ease,
+        background .3s ease,
+        color .3s ease,
+        border-color .3s ease;
+}
+
+.theme-toggle:hover{
+    transform:translateY(-3px);
+    background:var(--branco);
+    color:var(--laranja-escuro);
+    border-color:var(--branco);
 }
 /*
 .navbar nav a::after{
@@ -886,6 +930,94 @@ section{
 
     margin-bottom:30px;
 
+}
+
+/* TEMA ESCURO */
+
+/* Ajusta os fundos das secoes principais no modo escuro. */
+body.dark-theme .sobre,
+body.dark-theme .portfolio{
+    background:#140f0c;
+}
+
+body.dark-theme .servicos{
+    background:linear-gradient(180deg,#140f0c,#24100a);
+}
+
+body.dark-theme .pacotes{
+    background:linear-gradient(180deg,#1a120f,#2a1610);
+}
+
+/* Mantem titulos legiveis sobre fundos escuros. */
+body.dark-theme .titulo span{
+    color:#ffb36b;
+}
+
+body.dark-theme .titulo h2,
+body.dark-theme .pricing-card h3,
+body.dark-theme .orcamento-personalizado h3{
+    color:#ffd7a6;
+}
+
+/* Adapta cards e blocos de conteudo para o contraste do tema escuro. */
+body.dark-theme .sobre-content{
+    background:linear-gradient(135deg,#24100a,#3a170d);
+    border-color:rgba(255,215,166,.2);
+}
+
+body.dark-theme .sobre-content:hover{
+    background:#ffd7a617;
+}
+
+body.dark-theme .sobre-content:hover p{
+    color:#f8eadb;
+}
+
+body.dark-theme .card{
+    border-color:rgba(255,215,166,.18);
+    box-shadow:0 14px 32px rgba(0,0,0,.22);
+}
+
+body.dark-theme .card:hover{
+    background:#21140f;
+}
+
+body.dark-theme .card:hover h3,
+body.dark-theme .card:hover p{
+    color:#f8eadb;
+}
+
+body.dark-theme .pricing-card{
+    background:rgba(255,255,255,.07);
+    border-color:rgba(255,215,166,.18);
+    box-shadow:0 18px 40px rgba(0,0,0,.26);
+}
+
+/* Ajusta a tabela comparativa para nao ficar com fundo claro no modo escuro. */
+body.dark-theme .comparativo table{
+    background:#1f1511;
+    color:#f8eadb;
+}
+
+body.dark-theme .comparativo th,
+body.dark-theme .comparativo td{
+    border-bottom-color:rgba(255,215,166,.14);
+}
+
+body.dark-theme .comparativo tr:hover{
+    background:#2b1a13;
+}
+
+/* Estado visual do botao de tema quando o modo escuro esta ativo. */
+body.dark-theme .theme-toggle{
+    background:rgba(255,215,166,.16);
+    border-color:rgba(255,215,166,.35);
+    color:#ffd7a6;
+}
+
+body.dark-theme .theme-toggle:hover{
+    background:#ffd7a6;
+    color:#24100a;
 }
 
 
