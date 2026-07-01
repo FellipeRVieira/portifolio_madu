@@ -548,11 +548,10 @@ function applyTheme(theme) {
 
 }
 
-// Usa o tema salvo; se ainda nao existir, respeita a preferencia do dispositivo.
+// Usa o tema salvo; se ainda nao existir, inicia sempre no tema claro.
 const savedTheme = localStorage.getItem("theme");
-const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 
-applyTheme(savedTheme || preferredTheme);
+applyTheme(savedTheme || "light");
 
 // Salva a escolha para manter o mesmo tema ao recarregar a pagina.
 themeToggle.addEventListener("click", () => {
