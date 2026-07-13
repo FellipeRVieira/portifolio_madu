@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria | Madu</title>
+
+    <link rel="stylesheet" href="CSS/galeria.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <section class="hero-galeria">
+        <div class="overlay"></div>
+
+        <div class="hero-content">
+            <span class="linha"></span>
+            <h1>GALERIA</h1>
+            <p>
+                Cada momento merece ser lembrado.<br>
+                Explore os registros que contam histórias,<br>
+                emocionam e eternizam memórias.
+            </p>
+            <span class="linha"></span>
+        </div>
+    </section>
+
+    <!-- FILTROS -->
+    <section class="filtros">
+        <button class="active" data-filter="all">Todos</button>
+        <button data-filter="formatura">Formaturas</button>
+        <button data-filter="casamento">Casamentos</button>
+        <button data-filter="diversos">Diversos</button>
+    </section>
+
+    <!-- GALERIA -->
+    <section class="galeria">
+
+        <div class="item formatura">
+            <img src="img/trab1.jpeg">
+        </div>
+
+        <div class="item casamento">
+            <img src="img/trab3.jpeg">
+        </div>
+
+        <div class="item diversos">
+            <img src="img/trab2.jpeg">
+        </div>
+
+        <div class="item formatura">
+            <img src="img/trab1.jpeg">
+        </div>
+
+        <div class="item casamento">
+            <img src="img/trab1.jpeg">
+        </div>
+
+        <div class="item diversos">
+            <img src="img/trab1.jpeg">
+        </div>
+
+        <div class="item formatura">
+            <img src="img/trab1.jpeg">
+        </div>
+
+        <div class="item casamento">
+            <img src="img/trab1.jpeg">
+        </div>
+
+        <div class="item diversos">
+            <img src="img/trab1.jpeg">
+        </div>
+
+    </section>
+
+    <script>
+
+        const buttons = document.querySelectorAll(".filtros button");
+        const items = document.querySelectorAll(".item");
+
+        buttons.forEach(btn => {
+
+            btn.addEventListener("click", () => {
+
+                buttons.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+
+                const filtro = btn.dataset.filter;
+
+                items.forEach(item => {
+
+                    if (filtro === "all" || item.classList.contains(filtro)) {
+                        item.classList.remove("hide");
+                    } else {
+                        item.classList.add("hide");
+                    }
+
+                });
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>

@@ -649,6 +649,11 @@ section{
     color:var(--laranja-principal);
 }
 
+.btn-galeria{
+    display: table;
+    margin: 2rem auto 0;
+}
+
 /*Vídeo Carrossel*/
 .video-slide video{
     width:100%;
