@@ -169,14 +169,15 @@
                 <div class="swiper-wrapper">
 
                     <div class="swiper-slide video-slide">
-<video
-    class="portfolio-video"
-    muted
-    autoplay
-    loop
-    playsinline
-    webkit-playsinline
-    preload="metadata">
+
+                        <video
+                            class="portfolio-video"
+                            autoplay
+                            muted
+                            loop
+                            playsinline
+                            preload="metadata"
+                            >
                             <source src="img/teste.mp4" type="video/mp4">
                         </video>
 
@@ -185,13 +186,13 @@
                      <div class="swiper-slide video-slide">
 
                         <video
-    class="portfolio-video"
-    muted
-    autoplay
-    loop
-    playsinline
-    webkit-playsinline
-    preload="metadata">
+                            class="portfolio-video"
+                            autoplay
+                            muted
+                            loop
+                            playsinline
+                            preload="metadata"
+                            >
                             <source src="imggale/video3.mp4" type="video/mp4">
                         </video>
 
@@ -200,13 +201,13 @@
                     <div class="swiper-slide video-slide">
 
                         <video
-    class="portfolio-video"
-    muted
-    autoplay
-    loop
-    playsinline
-    webkit-playsinline
-    preload="metadata">
+                            class="portfolio-video"
+                            autoplay
+                            muted
+                            loop
+                            playsinline
+                            preload="metadata"
+                            >
                             <source src="img/teste2.mp4" type="video/mp4">
                         </video>
 
@@ -667,44 +668,21 @@
 
     revealOnScroll();
 
-const swiper = new Swiper(".meuPortfolio", {
+    const swiper = new Swiper(".meuPortfolio", {
 
-    loop: true,
+        loop: true,
 
-    autoplay: {
-        delay: 2500,
-        disableOnInteraction: false
-    },
-
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev"
-    },
-
-    on: {
-
-        init() {
-
-            setTimeout(atualizarVideos, 200);
-
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false
         },
 
-        slideChangeTransitionEnd() {
-
-            atualizarVideos();
-
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev"
         },
 
-        transitionEnd() {
-
-            atualizarVideos();
-
-        }
-
-    },
-
-    breakpoints: {
-
+        breakpoints: {
 
             // MOBILE
             0: {
@@ -748,7 +726,6 @@ const swiper = new Swiper(".meuPortfolio", {
     });
 
     // VÍDEOS DO PORTFÓLIO
-    /*
     const videos = document.querySelectorAll(".portfolio-video");
     const videoSlides = document.querySelectorAll(".video-slide");
 
@@ -830,87 +807,7 @@ const swiper = new Swiper(".meuPortfolio", {
 
         }
 
-    });*/
-
-    // ===========================
-// VÍDEOS DO PORTFÓLIO
-// ===========================
-
-const videos = document.querySelectorAll(".portfolio-video");
-
-// Reproduz apenas o vídeo do slide ativo
-function atualizarVideos() {
-
-    videos.forEach(video => {
-
-        video.pause();
-        video.currentTime = 0;
-
     });
-
-    document.querySelectorAll(".swiper-slide").forEach(slide => {
-
-        const video = slide.querySelector("video");
-
-        if (!video) return;
-
-        if (slide.classList.contains("swiper-slide-active")) {
-
-            video.muted = true;
-            video.playsInline = true;
-
-            const playPromise = video.play();
-
-            if (playPromise !== undefined) {
-
-                playPromise.catch(() => {});
-
-            }
-
-        }
-
-    });
-
-}
-
-// Pausa autoplay do Swiper
-function pausePortfolioCarousel() {
-    swiper.autoplay.stop();
-}
-
-// Continua autoplay
-function resumePortfolioCarousel() {
-    swiper.autoplay.start();
-}
-
-// Desktop
-document.querySelectorAll(".video-slide").forEach(slide => {
-
-    slide.addEventListener("mouseenter", pausePortfolioCarousel);
-    slide.addEventListener("mouseleave", resumePortfolioCarousel);
-
-});
-
-// Mobile
-document.querySelectorAll(".portfolio-video").forEach(video => {
-
-    video.addEventListener("touchstart", () => {
-
-        pausePortfolioCarousel();
-
-    });
-
-});
-
-document.addEventListener("touchstart", (e) => {
-
-    if (!e.target.closest(".video-slide")) {
-
-        resumePortfolioCarousel();
-
-    }
-
-});
 
 
     </script>
