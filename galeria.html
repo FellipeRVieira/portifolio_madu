@@ -192,35 +192,40 @@
 
         
 
-    <script>
+ <script>
 
-        const buttons = document.querySelectorAll(".filtros button");
-        const items = document.querySelectorAll(".item");
+    const buttons = document.querySelectorAll(".filtros button");
+    const items = document.querySelectorAll(".item");
 
-        buttons.forEach(btn => {
+    function aplicarFiltro(filtro) {
 
-            btn.addEventListener("click", () => {
+        items.forEach(item => {
+            item.classList.toggle("hide", !item.classList.contains(filtro));
+        });
 
-                buttons.forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
+    }
 
-                const filtro = btn.dataset.filter;
+    buttons.forEach(btn => {
 
-                items.forEach(item => {
+        btn.addEventListener("click", () => {
 
-                    if (filtro === "all" || item.classList.contains(filtro)) {
-                        item.classList.remove("hide");
-                    } else {
-                        item.classList.add("hide");
-                    }
+            buttons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
 
-                });
-
-            });
+            aplicarFiltro(btn.dataset.filter);
 
         });
 
-    </script>
+    });
+
+    // Descobre qual botão iniciou como active
+    const botaoInicial = document.querySelector(".filtros button.active");
+
+    if (botaoInicial) {
+        aplicarFiltro(botaoInicial.dataset.filter);
+    }
+
+</script>
 
 </body>
 
