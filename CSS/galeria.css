@@ -143,6 +143,15 @@ body{
     transform:scale(.85);
 }
 
+/* Foto horizontal ocupando toda a linha */
+.item.horizontal{
+    grid-column: 1 / -1;
+}
+
+.item.horizontal img{
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
 
 .video-slide{
     overflow:hidden;
@@ -165,6 +174,19 @@ body{
     box-shadow:0 18px 35px rgba(143,47,0,.24),0 25px 60px rgba(240,121,1,.18);
 }
 
+/* Vídeo horizontal */
+
+.video-horizontal{
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+}
+
+.video-horizontal video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 @media (max-width:1000px){
     .galeria{grid-template-columns:repeat(2, minmax(0, 1fr));}
 }
@@ -180,3 +202,25 @@ body{
 }
 
 
+/*Foto Horizontal*/
+@media (max-width:768px){
+
+    .item.horizontal{
+        grid-column:auto;
+    }
+
+    .item.horizontal img{
+        aspect-ratio:16/9;
+    }
+
+}
+
+/*Vídeo Horizontal*/
+@media (max-width:768px){
+
+    .video-horizontal{
+        grid-column: auto;
+        aspect-ratio: 16 / 9;
+    }
+
+}
