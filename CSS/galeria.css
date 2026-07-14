@@ -51,6 +51,7 @@ body{
     background:var(--creme-quente);
 }
 
+/*
 .card-apresentacao{
     width:min(100%, 720px);
     margin:0 auto;
@@ -58,8 +59,54 @@ body{
     border-radius:22px;
     background:var(--branco);
     box-shadow:0 14px 35px rgba(143,47,0,.12);
+}*/
+
+.card-apresentacao{
+    position: relative;
+
+    width:min(100%,760px);
+    margin:0 auto;
+    padding:50px 40px;
+
+    border-radius:22px;
+
+    /* Mesmo fundo do hover do card Sobre */
+    background:#ffd7a62c;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 15px 35px rgba(143,47,0,.18);
 }
 
+.card-apresentacao::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    padding:3px;
+    border-radius:22px;
+
+    background:linear-gradient(
+        90deg,
+        var(--laranja-principal),
+        var(--laranja-claro),
+        var(--vermelho-quente)
+    );
+
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    mask-composite:exclude;
+    -webkit-mask-composite:xor;
+}
+/*
 .card-apresentacao h1{
     font-family:'Playfair Display',serif;
     font-size:clamp(3.2rem,8vw,5.5rem);
@@ -71,6 +118,29 @@ body{
     margin-top:18px;
     font-size:1.1rem;
     line-height:1.8;
+}
+
+.linha{
+    display:block;
+    width:180px;
+    height:1px;
+    margin:20px auto;
+    background:var(--laranja-claro);
+}*/
+
+.card-apresentacao h1{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(3rem,7vw,5rem);
+    letter-spacing:.08em;
+    color:var(--laranja-escuro);
+    margin-bottom:10px;
+}
+
+.card-apresentacao p{
+    margin-top:18px;
+    font-size:1.1rem;
+    line-height:1.8;
+    color:var(--texto-escuro);
 }
 
 .linha{
