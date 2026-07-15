@@ -157,6 +157,8 @@
 
     <!-- PORTFÓLIO -->
     <section id="portfolio" class="portfolio">
+        <!-- Fundo atualizado com a mídia exibida no slide central. -->
+        <div class="portfolio-background" aria-hidden="true"></div>
         <div class="container">
 
             <div class="titulo centro reveal">
@@ -724,6 +726,64 @@
         }
 
     });
+
+    // FUNDO DESFOCADO DO CARROSSEL
+    // Cria uma cópia apenas visual da mídia central para usar no fundo da seção.
+    const portfolioBackground = document.querySelector(".portfolio-background");
+
+    function getSlideMedia(slide) {
+
+        const videoSource = slide.querySelector("video source");
+        const image = slide.querySelector("img");
+
+        if (videoSource) {
+            return { type: "video", src: videoSource.src };
+        }
+
+        return image ? { type: "image", src: image.src } : null;
+
+    }
+
+    function updatePortfolioBackground() {
+
+        // No desktop há três slides visíveis: o central fica uma posição após o ativo.
+        const visibleSlides = Number(swiper.params.slidesPerView) || 1;
+        const centralIndex = swiper.activeIndex + Math.floor(visibleSlides / 2);
+        const activeSlide = swiper.slides[centralIndex] || swiper.slides[swiper.activeIndex];
+        const media = getSlideMedia(activeSlide);
+
+        if (!media || portfolioBackground.dataset.source === media.src) return;
+
+        portfolioBackground.dataset.source = media.src;
+
+        const mediaElement = document.createElement(media.type === "video" ? "video" : "img");
+        mediaElement.className = "portfolio-background__media";
+
+        if (media.type === "video") {
+            mediaElement.src = media.src;
+            mediaElement.autoplay = true;
+            mediaElement.muted = true;
+            mediaElement.loop = true;
+            mediaElement.playsInline = true;
+        } else {
+            mediaElement.src = media.src;
+            mediaElement.alt = "";
+        }
+
+        const previousMedia = portfolioBackground.querySelector(".portfolio-background__media.is-active");
+        portfolioBackground.appendChild(mediaElement);
+
+        requestAnimationFrame(() => mediaElement.classList.add("is-active"));
+
+        if (previousMedia) {
+            previousMedia.classList.remove("is-active");
+            previousMedia.addEventListener("transitionend", () => previousMedia.remove(), { once: true });
+        }
+
+    }
+
+    swiper.on("init slideChangeTransitionStart", updatePortfolioBackground);
+    updatePortfolioBackground();
 
     // VÍDEOS DO PORTFÓLIO
     const videos = document.querySelectorAll(".portfolio-video");
