@@ -702,10 +702,16 @@
     function getSlideMedia(slide) {
 
         const videoSource = slide.querySelector("video source");
+        const videoEmbed = slide.querySelector("iframe");
         const image = slide.querySelector("img");
 
         if (videoSource) {
             return { type: "video", src: videoSource.src };
+        }
+
+        // Os vídeos atuais são embeds do Vimeo, portanto não possuem uma tag <video>.
+        if (videoEmbed) {
+            return { type: "embed", src: videoEmbed.src };
         }
 
         return image ? { type: "image", src: image.src } : null;
@@ -724,8 +730,14 @@
 
         portfolioBackground.dataset.source = media.src;
 
-        const mediaElement = document.createElement(media.type === "video" ? "video" : "img");
+        const mediaElement = document.createElement(
+            media.type === "video" ? "video" : media.type === "embed" ? "iframe" : "img"
+        );
         mediaElement.className = "portfolio-background__media";
+
+        if (media.type === "embed") {
+            mediaElement.classList.add("portfolio-background__media--embed");
+        }
 
         if (media.type === "video") {
             mediaElement.src = media.src;
@@ -733,6 +745,12 @@
             mediaElement.muted = true;
             mediaElement.loop = true;
             mediaElement.playsInline = true;
+        } else if (media.type === "embed") {
+            mediaElement.src = media.src;
+            mediaElement.setAttribute("frameborder", "0");
+            mediaElement.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
+            mediaElement.setAttribute("aria-hidden", "true");
+            mediaElement.tabIndex = -1;
         } else {
             mediaElement.src = media.src;
             mediaElement.alt = "";
