@@ -626,6 +626,9 @@
 
     </footer>
 
+    <button class="back-to-top" id="back-to-top" type="button" aria-label="Voltar ao topo" title="Voltar ao topo">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
 
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -636,6 +639,7 @@
     const menu = document.getElementById("menu");
     const themeToggle = document.getElementById("theme-toggle");
     const themeIcon = themeToggle.querySelector("i");
+    const backToTop = document.getElementById("back-to-top");
 
     // Aplica o tema escolhido no body e troca o icone do botao.
     function applyTheme(theme) {
@@ -734,6 +738,18 @@
     window.addEventListener("scroll", revealOnScroll);
 
     revealOnScroll();
+
+    // Exibe o atalho somente depois de uma rolagem significativa.
+    function updateBackToTopVisibility() {
+        backToTop.classList.toggle("is-visible", window.scrollY >= 400);
+    }
+
+    backToTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    window.addEventListener("scroll", updateBackToTopVisibility, { passive: true });
+    updateBackToTopVisibility();
 
     // FAQ: mantém apenas uma resposta aberta por vez.
     const perguntasFaq = document.querySelectorAll(".faq-pergunta");
