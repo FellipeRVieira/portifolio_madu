@@ -407,6 +407,102 @@
 
     </section>
 
+    <!-- PERGUNTAS FREQUENTES -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="titulo centro reveal">
+                <h2>Perguntas Frequentes</h2>
+                <p class="faq-subtitulo">Reunimos as dúvidas mais comuns para ajudar você antes de solicitar um orçamento.</p>
+            </div>
+
+            <div class="faq-lista reveal">
+                <article class="faq-item">
+                    <h3>
+                        <button class="faq-pergunta" type="button" id="faq-pergunta-1" aria-expanded="false" aria-controls="faq-resposta-1">
+                            <span>Quanto tempo demora a entrega?</span>
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </h3>
+                    <div class="faq-resposta" id="faq-resposta-1" role="region" aria-labelledby="faq-pergunta-1">
+                        <div class="faq-resposta-conteudo"><p>O prazo varia conforme o tipo de serviço contratado. Antes do fechamento, informamos uma previsão de entrega para que tudo fique alinhado.</p></div>
+                    </div>
+                </article>
+
+                <article class="faq-item">
+                    <h3>
+                        <button class="faq-pergunta" type="button" id="faq-pergunta-2" aria-expanded="false" aria-controls="faq-resposta-2">
+                            <span>Vocês atendem outras cidades?</span>
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </h3>
+                    <div class="faq-resposta" id="faq-resposta-2" role="region" aria-labelledby="faq-pergunta-2">
+                        <div class="faq-resposta-conteudo"><p>Sim. Atendemos Colatina e região, além de outras localidades mediante agendamento.</p></div>
+                    </div>
+                </article>
+
+                <article class="faq-item">
+                    <h3>
+                        <button class="faq-pergunta" type="button" id="faq-pergunta-3" aria-expanded="false" aria-controls="faq-resposta-3">
+                            <span>Como funciona o pagamento?</span>
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </h3>
+                    <div class="faq-resposta" id="faq-resposta-3" role="region" aria-labelledby="faq-pergunta-3">
+                        <div class="faq-resposta-conteudo"><p>O pagamento é combinado no momento da contratação e pode incluir um sinal para reserva da data.</p></div>
+                    </div>
+                </article>
+
+                <article class="faq-item">
+                    <h3>
+                        <button class="faq-pergunta" type="button" id="faq-pergunta-4" aria-expanded="false" aria-controls="faq-resposta-4">
+                            <span>As fotos passam por edição?</span>
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </h3>
+                    <div class="faq-resposta" id="faq-resposta-4" role="region" aria-labelledby="faq-pergunta-4">
+                        <div class="faq-resposta-conteudo"><p>Sim. Todas as imagens recebem tratamento de cor, luz e pequenos ajustes para garantir um resultado profissional.</p></div>
+                    </div>
+                </article>
+
+                <article class="faq-item">
+                    <h3>
+                        <button class="faq-pergunta" type="button" id="faq-pergunta-5" aria-expanded="false" aria-controls="faq-resposta-5">
+                            <span>Como recebo meu material?</span>
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </h3>
+                    <div class="faq-resposta" id="faq-resposta-5" role="region" aria-labelledby="faq-pergunta-5">
+                        <div class="faq-resposta-conteudo"><p>A entrega é realizada por meio de uma galeria online em alta qualidade, facilitando o download e o compartilhamento.</p></div>
+                    </div>
+                </article>
+
+                <article class="faq-item">
+                    <h3>
+                        <button class="faq-pergunta" type="button" id="faq-pergunta-6" aria-expanded="false" aria-controls="faq-resposta-6">
+                            <span>Vocês fazem vídeos também?</span>
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </h3>
+                    <div class="faq-resposta" id="faq-resposta-6" role="region" aria-labelledby="faq-pergunta-6">
+                        <div class="faq-resposta-conteudo"><p>Sim. Além da fotografia, produzimos vídeos para eventos, empresas e conteúdos para redes sociais.</p></div>
+                    </div>
+                </article>
+
+                <article class="faq-item">
+                    <h3>
+                        <button class="faq-pergunta" type="button" id="faq-pergunta-7" aria-expanded="false" aria-controls="faq-resposta-7">
+                            <span>Posso solicitar um orçamento personalizado?</span>
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </h3>
+                    <div class="faq-resposta" id="faq-resposta-7" role="region" aria-labelledby="faq-pergunta-7">
+                        <div class="faq-resposta-conteudo"><p>Claro! Cada projeto possui necessidades diferentes. Podemos montar uma proposta personalizada para você.</p></div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
 
     <!-- CTA -->
     <section id="contato" class="contato reveal">
@@ -638,6 +734,26 @@
     window.addEventListener("scroll", revealOnScroll);
 
     revealOnScroll();
+
+    // FAQ: mantém apenas uma resposta aberta por vez.
+    const perguntasFaq = document.querySelectorAll(".faq-pergunta");
+
+    perguntasFaq.forEach(pergunta => {
+        pergunta.addEventListener("click", () => {
+            const itemAtual = pergunta.closest(".faq-item");
+            const deveAbrir = pergunta.getAttribute("aria-expanded") === "false";
+
+            perguntasFaq.forEach(botao => {
+                botao.setAttribute("aria-expanded", "false");
+                botao.closest(".faq-item").classList.remove("is-open");
+            });
+
+            if (deveAbrir) {
+                pergunta.setAttribute("aria-expanded", "true");
+                itemAtual.classList.add("is-open");
+            }
+        });
+    });
 
     const swiper = new Swiper(".meuPortfolio", {
 
