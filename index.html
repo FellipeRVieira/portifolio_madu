@@ -79,39 +79,25 @@
 
             <div class="sobre-wrapper">
 
-                <div class="sobre-content reveal">
-
-                    <p>Me chamo Maria Eduarda, mas muitos me conhecem como Madu.</p>
-
-                    <p>
-                        Sempre fui apaixonada pelos detalhes, pelas histórias e pela forma
-                        como um simples vídeo pode fazer alguém sentir algo.
-                    </p>
-
-                    <p>
-                        Acredito que o conteúdo mais bonito é aquele que tem verdade,
-                        personalidade e propósito.
-                    </p>
-
-                    <p>
-                        Estou construindo meu caminho na captação de conteúdo com um olhar
-                        criativo, delicado e humano.
-                    </p>
-
-                    <p>
-                        Não quero apenas gravar vídeos: quero ajudar marcas e pessoas a
-                        mostrarem quem realmente são.
-                    </p>
-
+                <div class="sobre-content sobre-legenda reveal" aria-live="polite">
+                    <span class="legenda-rotulo"><i class="fa-solid fa-closed-captioning" aria-hidden="true"></i> Legenda</span>
+                    <p id="legenda-apresentacao" class="legenda-texto">Dê play para acompanhar minha apresentação.</p>
                 </div>
 
-            <div class="sobre-images reveal">
-
-                <img src="img/sobre4.jpeg" alt="">
-                <img src="img/sobre5.jpeg" alt="">
-                <img src="img/sobre2.jpeg" alt="">
-
-            </div>
+                <div class="sobre-video reveal">
+                    <div class="polaroid-video">
+                        <video id="video-apresentacao" controls playsinline preload="metadata" poster="img/sobre5.jpeg" aria-describedby="legenda-apresentacao">
+                            <source src="img/videoplayback.mp4" type="video/mp4">
+                            <track kind="captions" srclang="pt-BR" label="Português" src="img/apresentacao.vtt" default>
+                            Seu navegador não suporta vídeo HTML5.
+                        </video>
+                        <button class="video-capa-final" type="button" aria-label="Reproduzir a apresentacao novamente">
+                            <img src="img/sobre5.jpeg" alt="">
+                            <span><i class="fa-solid fa-play" aria-hidden="true"></i> Assistir novamente</span>
+                        </button>
+                        <p class="polaroid-assinatura">Minha apresentação</p>
+                    </div>
+                </div>
 
         </div>
 
@@ -780,6 +766,67 @@
 
     swiper.on("init slideChangeTransitionStart", updatePortfolioBackground);
     updatePortfolioBackground();
+
+    // LEGENDA EXIBIDA AO LADO DO VÍDEO DE APRESENTAÇÃO
+    const videoApresentacao = document.getElementById("video-apresentacao");
+    const legendaApresentacao = document.getElementById("legenda-apresentacao");
+
+    if (videoApresentacao && legendaApresentacao) {
+        const faixaDeLegendas = videoApresentacao.textTracks[0];
+        const elementoTrack = videoApresentacao.querySelector("track");
+        const legendaInicial = "Dê play para acompanhar minha apresentação.";
+
+        const atualizarLegenda = () => {
+            const falasAtivas = faixaDeLegendas && faixaDeLegendas.activeCues
+                ? Array.from(faixaDeLegendas.activeCues)
+                    .map(cue => cue.text.replace(/<[^>]*>/g, ""))
+                    .join(" ")
+                : "";
+
+            const novaLegenda = falasAtivas || legendaInicial;
+
+            if (legendaApresentacao.textContent !== novaLegenda) {
+                legendaApresentacao.classList.remove("legenda-texto--visivel");
+                legendaApresentacao.textContent = novaLegenda;
+                requestAnimationFrame(() => legendaApresentacao.classList.add("legenda-texto--visivel"));
+            }
+        };
+
+        const capaFinal = document.querySelector(".video-capa-final");
+        const ocultarCapaFinal = () => capaFinal?.classList.remove("is-visible");
+
+        if (faixaDeLegendas) {
+            // A legenda é mostrada no quadro ao lado, não sobre o vídeo.
+            faixaDeLegendas.mode = "hidden";
+            faixaDeLegendas.addEventListener("cuechange", atualizarLegenda);
+        }
+
+        // Alguns navegadores terminam de carregar o .vtt depois do script.
+        if (elementoTrack) {
+            elementoTrack.addEventListener("load", atualizarLegenda);
+            elementoTrack.addEventListener("error", () => {
+                legendaApresentacao.textContent = "Não foi possível carregar as legendas deste vídeo.";
+            });
+        }
+
+        videoApresentacao.addEventListener("timeupdate", atualizarLegenda);
+        videoApresentacao.addEventListener("play", () => {
+            ocultarCapaFinal();
+            atualizarLegenda();
+        });
+        videoApresentacao.addEventListener("ended", () => {
+            atualizarLegenda();
+            capaFinal?.classList.add("is-visible");
+        });
+
+        capaFinal?.addEventListener("click", () => {
+            videoApresentacao.currentTime = 0;
+            ocultarCapaFinal();
+            videoApresentacao.play();
+        });
+
+        requestAnimationFrame(() => legendaApresentacao.classList.add("legenda-texto--visivel"));
+    }
 
     // VÍDEOS DO PORTFÓLIO
     const videos = document.querySelectorAll(".portfolio-video");

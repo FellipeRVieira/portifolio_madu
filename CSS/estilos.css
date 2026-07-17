@@ -353,6 +353,147 @@ section{
     color: #2f1a12;
 }
 
+/* Legenda que acompanha o vídeo de apresentação. */
+.sobre-legenda{
+    display:flex;
+    min-height:300px;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.legenda-rotulo{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin-bottom:20px;
+    color:var(--laranja-claro);
+    font-size:.75rem;
+    font-weight:700;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+}
+
+.legenda-texto{
+    margin:0 !important;
+    font-size:clamp(1.05rem, 1.8vw, 1.4rem) !important;
+    line-height:1.7;
+    opacity:0;
+    transform:translateY(8px);
+    transition:opacity .35s ease, transform .35s ease;
+}
+
+.legenda-texto--visivel{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.sobre-legenda:hover .legenda-rotulo{
+    color:var(--laranja-escuro);
+}
+
+/* Moldura polaroid do vídeo de apresentação. */
+.sobre-video{
+    position:relative;
+    width:350px;
+    flex-shrink:0;
+}
+
+.polaroid-video{
+    position:relative;
+    padding:15px 15px 58px;
+    background:#fff9f0;
+    border:3px solid var(--laranja-vivo);
+    border-radius:5px;
+    box-shadow:0 18px 35px rgba(143,47,0,.2);
+    transform:rotate(2deg);
+    transition:transform .4s ease, box-shadow .4s ease;
+}
+
+.polaroid-video:hover{
+    transform:rotate(0) translateY(-7px);
+    box-shadow:0 25px 45px rgba(143,47,0,.26);
+}
+
+.polaroid-video video{
+    display:block;
+    width:100%;
+    aspect-ratio:3 / 4;
+    object-fit:cover;
+    background:#2f1a12;
+}
+
+.video-capa-final{
+    position:absolute;
+    inset:15px 15px 58px;
+    display:grid;
+    place-items:center;
+    padding:0;
+    overflow:hidden;
+    border:0;
+    background:#2f1a12;
+    cursor:pointer;
+    opacity:0;
+    pointer-events:none;
+    transform:scale(1.04);
+    transition:opacity .55s ease, transform .55s cubic-bezier(.22,1,.36,1);
+}
+
+.video-capa-final.is-visible{
+    opacity:1;
+    pointer-events:auto;
+    transform:scale(1);
+}
+
+.video-capa-final img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.video-capa-final span{
+    position:absolute;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 14px;
+    border-radius:999px;
+    background:rgba(47,26,18,.78);
+    color:#fff9f0;
+    font:600 .78rem "Poppins", sans-serif;
+    opacity:0;
+    transform:translateY(8px);
+    transition:opacity .25s ease, transform .25s ease;
+}
+
+.video-capa-final:hover span,
+.video-capa-final:focus-visible span{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.video-capa-final:focus-visible{
+    outline:3px solid var(--laranja-claro);
+    outline-offset:3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+    .legenda-texto,
+    .video-capa-final,
+    .video-capa-final span{
+        transition:none;
+    }
+}
+
+.polaroid-assinatura{
+    position:absolute;
+    right:16px;
+    bottom:16px;
+    margin:0;
+    color:var(--laranja-escuro);
+    font-size:.9rem;
+    font-weight:600;
+}
+
 /*Área das Imagens Sobre*/
 .sobre-images{
     position:relative;
@@ -986,6 +1127,10 @@ body.dark-theme .sobre-content:hover p{
     color:#f8eadb;
 }
 
+body.dark-theme .polaroid-video{
+    background:#f8eadb;
+}
+
 body.dark-theme .card{
     border-color:rgba(255,215,166,.18);
     box-shadow:0 14px 32px rgba(0,0,0,.22);
@@ -1393,6 +1538,11 @@ body.dark-theme .theme-toggle:hover{
     .sobre-wrapper{
         flex-direction:column;
         gap:50px;
+    }
+
+    .sobre-video{
+        width:min(350px, 100%);
+        margin:0 auto;
     }
 
     .sobre-images{
